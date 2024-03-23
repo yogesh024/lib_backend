@@ -8,21 +8,25 @@
 </head>
 <body>
   <h1>pay fine first</h1>
-  
+  <p>your have to pay {{fine_pay.amount}} as a fine</p>
+ 
     <form action="payment" method="post">
+        <input type="hidden" name="amount" value="{{fine_pay.amount}} ">
+        <input type="hidden" name="productName" value="Shocks">
         <script
         src="//checkout.stripe.com/v2/checkout.js"
         class="stripe-button";
-        data-key="<%=key%>"
-        data-amount="120"
+        data-key="{{key}}"
+        data-amount="amount"
         data-currency="usd"
-        data-name=yogesh
-        data-description="sgsjl"
+        data-name="pay fine"
+        data-description="pay fine"
         Data-locale="auto">
         </script>
 
     </form>
+    <h2>or go to this  link</h2>
+    <a href="https://buy.stripe.com/test_5kAaGTern8WN8ggbIJ">pay here</a>
    
 </body>
 </html>
-

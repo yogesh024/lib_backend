@@ -12,9 +12,10 @@ module.exports = {
     getProfile: async (req, res, next) => {
         const userId = req.userId;
         const allPurchasedBooks = await borrowerService.findAllPurchasedBooks(userId, next);
+        // const userpro=await userService.findUserByEmail(email ,next);
          //const showfine=await fineService.findFine({userId,bookId},next);
 
-        res.render("pages/profile", {books: allPurchasedBooks});
+        res.render("pages/profile", {books: allPurchasedBooks });
     },
 
     login: async (req, res, next) => {
@@ -27,7 +28,7 @@ module.exports = {
             res.locals.message = "User does not exist with this email.";
             return res.redirect("/user/login")
         }
-        if (!(bcrypt.compare(password, user.password))) {
+        if (! (bcrypt.compare(password, user.password))) {
             res.locals.message = "Incorrect password.";
             return res.redirect("/user/login")
         }

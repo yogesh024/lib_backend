@@ -1,0 +1,51 @@
+/* Set a background color for the body */
+body {
+    background-color: #f7f7f7;
+  }
+  
+  /* Center the jumbotron */
+  .jumbotron {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  /* Add a border to the jumbotron */
+  .jumbotron {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* Add padding to the jumbotron */
+  .jumbotron {
+    padding: 20px;
+  }
+  
+  /* Style the h1 inside the jumbotron */
+  .jumbotron h1 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Style the container */
+  .container {
+    margin-top: 30px;
+  }
+  
+  /* Style the columns inside the row */
+  .row > div {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  /* Style the image */
+  img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+    margin-top: 30px;
+  }
+  

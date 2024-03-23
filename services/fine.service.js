@@ -5,6 +5,7 @@ module.exports = {
     createFine: async (body, next) => {
         try {
             const fine = await dbHelper.create(fineModel, body, next);
+
             return fine;
         } catch (e) {
             console.log(e.toString());
@@ -20,15 +21,15 @@ module.exports = {
             next(e);
         }
     },
-    // addFine:function addFineToAccount(userId, getTotalFine) {
-    //     const user = fineModel.find(b => b.id === userId);
+    addFine:function addFineToAccount(userId, getTotalFine) {
+        const user = fineModel.find(b => b.id === userId);
       
-    //     if (user) {
-    //       user.fines += fineAmount;
-    //       fs.writeFileSync('database.json', JSON.stringify(db));
-    //       return true; // indicate success
-    //     } else {
-    //       return false; // indicate failure
-    //     }
-    // }
+        if (user) {
+          user.fines += fineAmount;
+          fs.writeFileSync('database.json', JSON.stringify(db));
+          return true; // indicate success
+        } else {
+          return false; // indicate failure
+        }
+    }
 }

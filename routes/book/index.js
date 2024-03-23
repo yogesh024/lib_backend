@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Book = require('../../model/book');
 const { bookController } = require("../../controllers");
-const {authMiddleware, authrorizationMiddleware} = require("../../middlewares");
+const {authMiddleware, authrorizationMiddleware,loggedInMiddleware} = require("../../middlewares");
 
 /* GET home page. */
 router.get('/', bookController.displayBooks);

@@ -1,24 +1,87 @@
-<div class="container">
-  <div class="jumbotron">
-    <h1>User Profile</h1>
-    <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing
-      responsive, mobile-first projects on the web.</p>
-  </div>
-  <div class="profile-book-section">
-    <h3>Purchased Books</h3>
-    <ul class="list-group">
-      {{#each books}}
-      <li class="list-group-item">{{this.bookId.book_name}}   Purchase date: {{this.purchaseDate}} -- 
-        
-        
-            <a href="/book/return/{{this.bookId._id}}" class="btn btn-info"> Return book </a>
-        
-        
-    
-        
-        </li>
+<!DOCTYPE html>
+<html lang="en">
 
-      {{/each}}
-    </ul>
-  </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile page</title>
+    <link rel="stylesheet" href="/profilesheets/style.css" />
+    <script src="https://kit.fontawesome.com/a2ed5c267b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    {{!-- navigation bar --> --}}
+    {{!-- <h1>LIBRARY DUES</h1> --> --}}
+    <div id="mySidenav" class="nav">
+        <li>
+            <a href="/" id="home">
+                <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li>
+            <a href="/book" id="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li>
+            <a href="" id="upload">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li>
+            <a href="contactus/index.html" id="contactus">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+            </a>
+        </li>
+    </div>
+<div class="card">
+    <h2 class="header">Purchased books</h2>
+    <div class="details">
+        <ul class="list-group">
+            {{#each books}}
+            {{!-- <div class="user-email">User :{{this.email}} </div> --}}
+            <li class="list-group-item">
+                <div class="book-name"> Book Name :{{this.bookId.book_name}}</div>
+                <div class="purchase-date">Purchase date: {{this.purchaseDate}}</div>
+                <div class="due-date">Due date:  {{this.dueDate}}</div>
+                <a href="/book/return/{{this.bookId._id}}" class="btn btn-info"> Return book </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
 </div>
+
+
+    </div>
+</body>
+
+</html>
+
+{{!-- <h3>Purchased Books</h3>
+<div class="container">
+    <div class="jumbotron">
+
+    </div>
+    <div class="profile-book-section">
+        <h3>Purchased Books</h3>
+        <ul class="list-group">
+            {{#each books}}
+            <li class="list-group-item">{{this.bookId.book_name}} Purchase date: {{this.purchaseDate}} --
+
+
+                <a href="/book/return/{{this.bookId._id}}" class="btn btn-info"> Return book </a>
+
+
+
+
+            </li>
+
+            {{/each}}
+        </ul>
+    </div>
+</div>
+{{!-- </div> --}}
+{{!-- </body>
+
+</html> --}} --}}

@@ -4,3 +4,27 @@
     margin-bottom: 5px;
     background-color: aliceblue;
 }
+.navbar {
+    background-color: #333;
+  }
+  
+  .navbar .navbar-brand {
+    color: #fff;
+  }
+  
+  .navbar .nav-link {
+    color: #fff;
+  }
+  
+  .navbar .nav-link:hover {
+    color: #f5f5f5;
+  }
+  
+  .navbar-toggler {
+    border-color: #fff;
+  }
+  
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+  

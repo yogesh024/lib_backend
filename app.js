@@ -25,8 +25,8 @@ mongoose.connect(DB)
     console.log("fieled to connect")
 })
 
-const PUBLISHABLE_KEY="pk_test_51Mo1MYSGfS5jrW5jYb2rKIVBRUsmNz20H64EZcCgqZszI2AmcHtrd6ngcaTZJjthDB8u8uNSE7Lx1QXf2C5DYp7g00yj6TZnRC"
-const SECRET_KEY="sk_test_51Mo1MYSGfS5jrW5j8LBF379kbI46l2FXlQ9ooJ5hunEmTWiHSRMRlicZCxv8T9Ya2YoowfnoasX58k5r1clFJ5tz00ZYLkz5dg"
+const PUBLISHABLE_KEY=process.env.PUBLISHABLE_KEY
+const SECRET_KEY=process.env.SECRET_KEY
 const stripe=require('stripe')(SECRET_KEY)
 
 
@@ -65,45 +65,46 @@ app.use('/user',book)
 app.use(function (req, res, next) {
     next(createError(404));
 });
-app.get('/',(req,res)=>{
-    res.render("pages/fine",{
-        key:PUBLISHABLE_KEY
-    })
-})
-app.post('/payment',(req,res)=>{
-    stripe.customers.create({
-        email:req.body.stripeEmail,
-        source:req.body.stripeToken,
-        name:'yogesh',
-        adress:{
-            line1:'askjdl',
-            postal_code:'1100',
-            country:'india'
-        }
-    })
-    .then((customer)=>{
-        return stripe.create({
-            amount:120,
-            currency:'USD',
-            customer:customer.id
+// app.get('/',(req,res)=>{
+//     res.render("pages/fine",{
+//         key:PUBLISHABLE_KEY
+//     })
+// })
+// app.post('/payment',(req,res)=>{
+//     stripe.customers.create({
+//         email:req.body.stripeEmail,
+//         source:req.body.stripeToken,
+//         name:'yogesh',
+//         adress:{
+//             line1:'askjdl',
+//             postal_code:'1100',
+//             country:'india'
+//         }
+//     })
+//     .then((customer)=>{
+//         return stripe.create({
+//             amount:120,
+//             currency:'USD',
+//             customer:customer.id
 
-        })
+//         })
 
-    })
-    .then((charge)=>{
-        console.log(charge)
-        res.send("success")
-    })
-    .catch((err)=>{
-        res.send(err)
-    })
+//     })
+//     .then((charge)=>{
+//         console.log(charge)
+//         res.send("success")
+//     })
+//     .catch((err)=>{
+//         res.send(err)
+//     })
 
 
-})
+// })
+
 
 // error handler
 app.listen(8999, ()=>{
-    console.log("listening to the port 8580")
+    console.log("listening to the port 8999")
 })
 
     

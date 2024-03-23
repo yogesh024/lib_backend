@@ -1,5 +1,6 @@
 const { bookService, fineService, borrowerService, returnService } = require("../services");
-const Fine = require ("../model/fine.model")
+const Fine = require ("../model/fine.model");
+// const returnbooks=require('../model/return.model');
 
 module.exports = {
     displayBooks: async (req, res, next) => {
@@ -59,9 +60,10 @@ module.exports = {
         
         const userId = req.userId;
         const fine = await Fine.find();
-        //  console.log(fine);
+        //   console.log('hello this is fine',fine);
         const { bookId } = req.params;
         const purchasedBook = await borrowerService.findPurchaseBookById(userId, bookId, next);
+        const returnbooks=await returnService.findReturnBookById(userId, bookId, next)
         // console.log('purchasedBook', purchasedBook)
         if (purchasedBook && !purchasedBook?.active) {
             // book is already returned
@@ -83,46 +85,41 @@ module.exports = {
         await borrowerService.updateBorrowerBook(userId, bookId, { active: false }, next);
 
         const date1 = new Date(purchasedBook.purchaseDate);
-        const date2 = new Date();
+        const date2 = new Date(25/5/2025);
         const diffTime = Math.abs(date2 - date1);
+        
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         console.log(diffDays)
+        const lbfine=Math.abs(diffDays-30);
 
-        // add entry to return service
-        await returnService.returnBook({ userId, bookId }, next);
+
 
         // calculate fine
-
-        if (diffDays <= 30) {
+        if (diffDays >= 30) {
             try {
-                await fineService.createFine({ userId }, next);
-            } catch (e) {
-                console.log(e.toString())
-            }
-            
 
-            // return await returnService.returnBook({ userId, bookId }, next);
-            return res.redirect("/user/profile");
+                const as =await fineService.createFine({ userId,amount:lbfine }, next);
+                const fine12=await fineService.findFine(userId);
+                console.log(fine12);
+                res.render("pages/fine",{fine_pay:fine12});
+
+                const fineRecord = await fineService.findFine(userId);
+                if (fineRecord && fineRecord.amount == 0) {
+                    // Fine is paid, redirect to success page
+                    return  await returnService.returnBook({ userId, bookId }, next);
+                }
+                
+            } catch (e) {
+                console.log(e)
+            }
         
         }
-        // else{
-        //     const getTotalFine = (diffDays / 7) * 7;
+        else{
+                await fineService.createFine({ userId }, next); 
+                await returnService.returnBook({ userId, bookId }, next);
+                res.redirect("/user/profile");
 
-
-        //      await fineService.createFine({ userId, amount: getTotalFine }, next);
-        //     //  console.log(as)
-        //     res.render('pages/fine',);
-        // }
-
-        // for every week 7 rs is fine
-         const getTotalFine = (diffDays / 7) * 7;
-
-        await fineService.createFine({ userId, amount: getTotalFine }, next)
-
-        res.render("pages/fine");
-       
-
-        // res.render("pages/fine",fine);
+        }
     }
   
 }
