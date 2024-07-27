@@ -65,6 +65,10 @@ app.use('/user',book)
 app.use(function (req, res, next) {
     next(createError(404));
 });
+
+app.get("/",(req,res)=>{
+    res.send("hello");
+})
 // app.get('/',(req,res)=>{
 //     res.render("pages/fine",{
 //         key:PUBLISHABLE_KEY
